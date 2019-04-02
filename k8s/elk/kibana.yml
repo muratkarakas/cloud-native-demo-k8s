@@ -1,0 +1,49 @@
+##################################################################################################
+# kibana Service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  namespace: cna
+  labels:
+    app: elk
+    serv: kibana
+spec:
+  ports:
+  - nodePort: 32601
+    port: 5601
+    name: http
+  selector:
+    serv: kibana
+  type: NodePort  
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kibana-v1
+  namespace: cna
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: elk
+        serv: kibana
+        version: v1
+    spec:
+      containers:
+      - image: docker.elastic.co/kibana/kibana:6.6.0
+        env:
+         - name: ELASTICSEARCH_URL
+           value: "http://elasticsearch:9200"
+        securityContext:
+          runAsUser: 1000
+        command: ["kibana"]
+        imagePullPolicy: IfNotPresent
+        name: kibana
+        ports:
+        - containerPort: 5601
+          protocol: TCP
+
+---

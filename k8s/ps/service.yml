@@ -1,0 +1,20 @@
+##################################################################################################
+# Product Service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: cna
+  name: product-service
+  labels:
+     app: product-service
+     version: v1
+spec:
+  ports:
+  - nodePort: 32083
+    port: 8083
+    targetPort: 8083
+    name: http
+  selector:
+    app: product-service
+  type: NodePort

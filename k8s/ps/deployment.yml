@@ -1,0 +1,39 @@
+##################################################################################################
+# Product Service
+##################################################################################################
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cna
+  name: product-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: product-service
+        version: v1
+    spec:
+      containers:
+      - image: k8s-product-service:latest
+        imagePullPolicy: IfNotPresent
+        args: ["--spring.config.location=/deployments/config/application.yml"]
+        name: product-service 
+        ports:
+        - containerPort: 8083
+          protocol: TCP
+        volumeMounts:
+        - name: application-config
+          mountPath: "/deployments/config"
+          readOnly: true  
+      volumes:
+      - name: application-config
+        configMap:
+          name: ps-config
+          items:
+          - key: application.yml
+            path: application.yml

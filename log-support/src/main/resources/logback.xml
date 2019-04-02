@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+	<include
+		resource="org/springframework/boot/logging/logback/base.xml" />
+	<springProperty name="appName"
+		source="spring.application.name" />
+
+
+
+
+	<appender name="logstash"
+		class="net.logstash.logback.appender.LoggingEventAsyncDisruptorAppender">
+		<appender name="logstash"
+			class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+			<keepAliveDuration>5 minutes</keepAliveDuration>
+			<reconnectionDelay>10 second</reconnectionDelay>
+			<waitStrategyType>blocking</waitStrategyType>
+			<ringBufferSize>16384</ringBufferSize>
+			<destination>logstash:5000</destination>
+
+			<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+				<customFields>{"appName":"${appName}"}</customFields>
+			</encoder>
+		</appender>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="logstash" />
+	</root>
+	<logger name="com.netflix" level="info" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+	<logger name="org.springframework" level="info" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+
+</configuration>

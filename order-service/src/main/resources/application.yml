@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: order-service
+
+client:
+    productservice: 
+        path: http://localhost:8083
+    customerservice: 
+        path: http://localhost:8082
+kafka:
+  producer:
+    bootstrap: localhost:9092 #kafka:9092
+    topic: orders

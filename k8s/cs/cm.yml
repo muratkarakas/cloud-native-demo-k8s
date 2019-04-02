@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  application.yml: |-
+    server:
+        port: 8082
+    spring:
+        application:
+            name: customer-service
+    management:
+        security:    
+             enabled: false 
+    
+kind: ConfigMap
+metadata:
+  name: cs-config
+  namespace: cna

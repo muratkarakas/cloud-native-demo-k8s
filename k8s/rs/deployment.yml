@@ -1,0 +1,39 @@
+##################################################################################################
+# Rating Service
+##################################################################################################
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cna
+  name: rating-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rating-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: rating-service
+        version: v1
+    spec:
+      containers:
+      - image: k8s-rating-service:latest
+        imagePullPolicy: IfNotPresent
+        args: ["--spring.config.location=/deployments/config/application.yml"]
+        name: rating-service 
+        ports:
+        - containerPort: 8084
+          protocol: TCP
+        volumeMounts:
+        - name: application-config
+          mountPath: "/deployments/config"
+          readOnly: true  
+      volumes:
+      - name: application-config
+        configMap:
+          name: rs-config
+          items:
+          - key: application.yml
+            path: application.yml

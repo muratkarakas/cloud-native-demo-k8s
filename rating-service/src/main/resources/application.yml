@@ -1,0 +1,13 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: rating-service
+
+        
+kafka:
+  consumer:
+    bootstrap: localhost:9092 # kafka
+    group: WorkUnitApp
+    topic: orders    

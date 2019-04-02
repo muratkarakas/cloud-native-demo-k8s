@@ -1,0 +1,83 @@
+##################################################################################################
+# Logstash  ConfigMap
+##################################################################################################
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    logstash.conf: "
+    input {
+      tcp {
+        port => 5000
+        codec => json_lines
+      }
+    }
+
+    output {
+      elasticsearch {
+        hosts => \"elasticsearch:9200\"
+      }
+    }"
+  kind: ConfigMap
+  metadata:
+    namespace: cna
+    name: logstash
+kind: List
+metadata:
+  namespace: cna
+  resourceVersion: ""
+  selfLink: ""
+---
+##################################################################################################
+# Logstash Service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: cna
+  name: logstash
+  labels:
+    app: elk
+    serv: logstash
+spec:
+  ports:
+  - port: 5000
+    name: http
+  selector:
+    serv: logstash
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cna
+  name: logstash-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tcmb-so
+        serv: logstash
+        version: v1
+    spec:
+      containers:
+      - image: docker.elastic.co/logstash/logstash:6.6.0
+        imagePullPolicy: IfNotPresent
+        command: ["logstash"]
+        args: ["-f","/etc/logstash/conf.d/logstash.conf"]
+        name: logstash
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        volumeMounts:
+        - name: application-config 
+          mountPath: "/etc/logstash/conf.d" 
+          readOnly: false
+      volumes:
+      - name: application-config
+        configMap:
+          name: logstash 
+          items:
+          - key: logstash.conf
+            path: logstash.conf
+---

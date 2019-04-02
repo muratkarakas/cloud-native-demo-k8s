@@ -1,0 +1,39 @@
+##################################################################################################
+# Customer Service
+##################################################################################################
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cna
+  name: customer-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: customer-service
+        version: v1
+    spec:
+      containers:
+      - image: k8s-customer-service:latest
+        imagePullPolicy: IfNotPresent
+        args: ["--spring.config.location=/deployments/config/application.yml"]
+        name: customer-service 
+        ports:
+        - containerPort: 8082
+          protocol: TCP
+        volumeMounts:
+        - name: application-config
+          mountPath: "/deployments/config"
+          readOnly: true  
+      volumes:
+      - name: application-config
+        configMap:
+          name: cs-config
+          items:
+          - key: application.yml
+            path: application.yml

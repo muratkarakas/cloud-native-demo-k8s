@@ -1,0 +1,39 @@
+##################################################################################################
+# Order Service
+##################################################################################################
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cna
+  name: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: order-service
+        version: v1
+    spec:
+      containers:
+      - image: k8s-order-service:latest
+        imagePullPolicy: IfNotPresent
+        args: ["--spring.config.location=/deployments/config/application.yml"]
+        name: order-service 
+        ports:
+        - containerPort: 8085
+          protocol: TCP
+        volumeMounts:
+        - name: application-config
+          mountPath: "/deployments/config"
+          readOnly: true  
+      volumes:
+      - name: application-config
+        configMap:
+          name: os-config
+          items:
+          - key: application.yml
+            path: application.yml

@@ -1,0 +1,48 @@
+##################################################################################################
+# elasticsearch Service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: cna
+  name: elasticsearch
+  labels:
+    app: elk
+    serv: elasticsearch
+spec:
+  ports:
+  - port: 9200
+    name: http
+  - port: 9300
+    name: http2  
+  selector:
+    serv: elasticsearch
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cna
+  name: elasticsearch-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: elk
+        serv: elasticsearch
+        version: v1
+    spec:
+      containers:
+      - image: docker.elastic.co/elasticsearch/elasticsearch:6.6.0
+        securityContext:
+          runAsUser: 1000
+        command: ["elasticsearch"]
+        imagePullPolicy: IfNotPresent
+        name: elasticsearch
+
+        ports:
+        - containerPort: 9200
+          protocol: TCP
+        - containerPort: 9300
+          protocol: TCP  
+---
