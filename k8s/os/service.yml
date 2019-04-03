@@ -6,6 +6,8 @@ kind: Service
 metadata:
   namespace: cna
   name: order-service
+  annotations:
+    traefik.backend.name: order-service
   labels:
      app: order-service
      version: v1

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cna
+  namespace: cna
+  annotations:
+    traefik.frontend.rule.type: PathPrefix
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /products
+        backend:
+          serviceName: product-service
+          servicePort: http
+      - path: /orders
+        backend:
+          serviceName: order-service
+          servicePort: http
+      - path: /customers
+        backend:
+          serviceName: customer-service
+          servicePort: http
