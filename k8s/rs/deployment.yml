@@ -22,7 +22,12 @@ spec:
       - image: k8s-rating-service:latest
         imagePullPolicy: IfNotPresent
         args: ["--spring.config.location=/deployments/config/application.yml"]
-        name: rating-service 
+        name: rating-service
+        livenessProbe:
+          httpGet:
+             path: /health
+             port: 8084
+          initialDelaySeconds: 30         
         ports:
         - containerPort: 8084
           protocol: TCP

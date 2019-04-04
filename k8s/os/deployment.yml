@@ -22,7 +22,12 @@ spec:
       - image: k8s-order-service:latest
         imagePullPolicy: IfNotPresent
         args: ["--spring.config.location=/deployments/config/application.yml"]
-        name: order-service 
+        name: order-service
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8085
+          initialDelaySeconds: 30    
         ports:
         - containerPort: 8085
           protocol: TCP

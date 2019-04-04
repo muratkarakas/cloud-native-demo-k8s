@@ -82,6 +82,13 @@ spec:
       containers:
       - image: wurstmeister/kafka
         name: kafka
+        livenessProbe:
+          exec:
+           command:
+           - sh
+           - -c
+           - "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server=kafka:9092"
+          initialDelaySeconds: 70      
         env:
         - name: KAFKA_ADVERTISED_HOST_NAME
           value: kafka
