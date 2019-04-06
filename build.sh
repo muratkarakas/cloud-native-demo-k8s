@@ -6,12 +6,6 @@ mvn install
 cd ..
 
 
-cd tracing-support
-mvn install
-
-cd ..
-
-
 cd customer-service
 mvn package jib:dockerBuild -DskipTests
 

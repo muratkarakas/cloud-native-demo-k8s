@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: product-service-vs
+  namespace: cna
+spec:
+  hosts:
+    - "product-service"
+  http:
+    - match:
+       - uri:
+            prefix: /
+      route:
+        - destination:
+            host: product-service
+            port: 
+               number: 8083
+      timeout: 3000ms
+  

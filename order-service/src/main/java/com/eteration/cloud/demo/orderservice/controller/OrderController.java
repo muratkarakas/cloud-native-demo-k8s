@@ -6,9 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eteration.cloud.demo.orderservice.dto.OrderDTO;
@@ -28,7 +28,7 @@ public class OrderController {
 
 	
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public OrderResult createOrder(@RequestBody OrderDTO order) throws InterruptedException, ExecutionException  {
 		logger.info("Received order create request : {}",order);
 		OrderResult or = orderService.createOrder(order);
@@ -37,8 +37,8 @@ public class OrderController {
 	}
 
 
-	@Scheduled(fixedRate = 60000)
-	private void creteSampleOrder() throws InterruptedException, ExecutionException {
+	//@Scheduled(fixedRate = 60000)
+	public void creteSampleOrder() throws InterruptedException, ExecutionException {
 		logger.info("Scheduled sample order creation start");
 		OrderDTO dto = new OrderDTO();
 		
