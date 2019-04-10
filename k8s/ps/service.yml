@@ -8,7 +8,6 @@ metadata:
   name: product-service
   labels:
      app: product-service
-     version: v1
 spec:
   ports:
   - nodePort: 32083

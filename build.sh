@@ -14,6 +14,10 @@ cd ..
 cd product-service
 mvn package jib:dockerBuild -DskipTests
 
+cd ..
+
+cd product-service-v2
+mvn package jib:dockerBuild -DskipTests
 
 cd ..
 

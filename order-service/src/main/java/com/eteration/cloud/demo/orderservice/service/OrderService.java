@@ -34,7 +34,7 @@ public class OrderService {
 		CustomerDTO customerDTO = customerServiceClient.readCustomerById(order.getCustomerId());
 		
 		
-		or.setMessage("Dear customer "+customerDTO.getName() +" "+customerDTO.getSurname() +" your order is send to your address: "+customerDTO.getAddress());
+		or.setMessage("Dear customer "+customerDTO.getName() +" "+customerDTO.getSurname() +" your order "+productDTO.getName()+" is send to your address: "+customerDTO.getAddress());
 		
 		double unitPrice = productDTO.getPrice();
 		or.setTotalAmount(unitPrice*order.getCount());
