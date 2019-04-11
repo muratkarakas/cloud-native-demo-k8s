@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: http-gateway
+  namespace: cna
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: external-services
+  namespace: cna  
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - http-gateway                      
+  http:
+  - match:
+    - uri:
+         prefix: /orders
+    route:
+    - destination:
+        host: order-service             
+        port:
+          number: 8085              
