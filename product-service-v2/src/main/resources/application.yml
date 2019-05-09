@@ -3,3 +3,11 @@ server:
 spring:
     application:
         name: product-service-v2
+    boot:
+        admin:
+             url: http://localhost:6789
+             
+management:
+  security:
+    enabled: false             
+                       

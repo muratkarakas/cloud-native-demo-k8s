@@ -4,7 +4,14 @@ server:
 spring:
   application:
     name: rating-service
-
+  boot:
+        admin:
+             url: http://localhost:6789
+             
+management:
+  security:
+    enabled: false             
+               
         
 kafka:
   consumer:

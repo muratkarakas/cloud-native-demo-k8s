@@ -3,3 +3,13 @@ server:
 spring:
     application:
         name: customer-service
+    boot:
+        admin:
+             url: http://localhost:6789
+             
+management:
+  security:
+    enabled: false             
+               
+        
+        

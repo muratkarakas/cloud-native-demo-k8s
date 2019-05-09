@@ -1,7 +1,14 @@
 spring:
   application:
     name: order-service
-
+  boot:
+        admin:
+             url: http://localhost:6789
+             
+management:
+  security:
+    enabled: false             
+               
 client:
     productservice: 
         path: http://localhost:8083

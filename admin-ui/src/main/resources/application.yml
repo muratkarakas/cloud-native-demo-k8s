@@ -1,0 +1,5 @@
+server:
+    port: 6789
+spring:
+    application:
+        name: admin-ui
