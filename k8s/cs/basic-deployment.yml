@@ -1,0 +1,27 @@
+##################################################################################################
+# Customer Service
+##################################################################################################
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cna
+  name: customer-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: customer-service
+        version: v1
+    spec:
+      containers:
+      - image: k8s-customer-service:latest
+        imagePullPolicy: IfNotPresent
+        name: customer-service 
+        ports:
+        - containerPort: 8082
+          protocol: TCP
