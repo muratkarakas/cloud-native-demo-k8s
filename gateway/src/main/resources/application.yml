@@ -1,0 +1,14 @@
+server:
+  port: 9999
+  
+zuul:
+  routes:
+   customers: 
+     path: /c/**
+     url: http://localhost:8082
+   products: 
+     path: /p/**
+     url: http://localhost:8083
+   orders: 
+     path: /o/**
+     url: http://localhost:8080         
