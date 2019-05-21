@@ -20,7 +20,10 @@
 			<destination>logstash:5000</destination>
 
 			<encoder class="net.logstash.logback.encoder.LogstashEncoder">
-				<customFields>{"appName":"${appName}"}</customFields>
+				<customFields>{"kubernetes.labels.app":"${appName}"}</customFields>
+				<fieldNames>
+					<message>log</message>
+				</fieldNames>
 			</encoder>
 		</appender>
 	</appender>

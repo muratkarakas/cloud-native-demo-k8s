@@ -61,7 +61,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: docker.elastic.co/logstash/logstash:6.6.0
+      - image: docker.elastic.co/logstash/logstash:7.1.0
         imagePullPolicy: IfNotPresent
         command: ["logstash"]
         args: ["-f","/etc/logstash/conf.d/logstash.conf"]

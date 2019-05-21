@@ -33,13 +33,12 @@ spec:
         version: v1
     spec:
       containers:
-      - image: docker.elastic.co/elasticsearch/elasticsearch:6.6.0
-        securityContext:
-          runAsUser: 1000
-        command: ["elasticsearch"]
+      - image: docker.elastic.co/elasticsearch/elasticsearch:7.1.0
+        env:
+         - name: discovery.type
+           value: "single-node"
         imagePullPolicy: IfNotPresent
         name: elasticsearch
-
         ports:
         - containerPort: 9200
           protocol: TCP
