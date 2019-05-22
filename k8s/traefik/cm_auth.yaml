@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: authbasic
+    namespace: cna
+data:
+    auth: bXVyYXQ6JGFwcjEkejF6c2VnYjQkRmRXMXBZR0dKMG5xRkR3UFp1ODVSLg==
