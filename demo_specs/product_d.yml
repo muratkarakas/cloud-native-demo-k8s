@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cna
+  name: product-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: product-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: product-service
+        version: v1
+    spec:
+      containers:
+      - image: k8s-product-service:latest
+        imagePullPolicy: IfNotPresent
+        name: product-service 
+        ports:
+        - containerPort: 8070
+          protocol: TCP
+          

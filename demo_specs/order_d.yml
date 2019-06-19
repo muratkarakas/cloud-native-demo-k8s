@@ -1,30 +1,30 @@
 ##################################################################################################
-# Customer Service
+# Order Service
 ##################################################################################################
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   namespace: cna
-  name: customer-service
+  name: order-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: customer-service
+      app: order-service
       version: v1
   template:
     metadata:
       labels:
-        app: customer-service
+        app: order-service
         version: v1
     spec:
       containers:
-      - image: k8s-customer-service:latest
+      - image: k8s-order-service:latest
         imagePullPolicy: IfNotPresent
         args: ["--spring.config.location=/deployments/config/application.yml"]
-        name: customer-service 
+        name: order-service
         ports:
-        - containerPort:  {{ .Values.service.port }}
+        - containerPort: 8090
           protocol: TCP
         volumeMounts:
         - name: application-config
@@ -33,7 +33,7 @@ spec:
       volumes:
       - name: application-config
         configMap:
-          name: cs-config
+          name: os-config
           items:
           - key: application.yml
             path: application.yml
