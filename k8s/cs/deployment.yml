@@ -24,7 +24,7 @@ spec:
         args: ["--spring.config.location=/deployments/config/application.yml"]
         name: customer-service 
         ports:
-        - containerPort:  {{ .Values.service.port }}
+        - containerPort:  8082
           protocol: TCP
         volumeMounts:
         - name: application-config
