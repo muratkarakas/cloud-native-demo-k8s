@@ -24,7 +24,7 @@ public class RequestFilter implements Filter{
 
         while (headerNames.hasMoreElements()) {
 			String name =  headerNames.nextElement();
-			if(name.startsWith("x-")) {
+			if(true || name.startsWith("x-") || name.startsWith("uber")) {
 		        RequestContext.getContext().getHeaders().put(name, httpServletRequest.getHeader(name));
 
 			}

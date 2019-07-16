@@ -23,9 +23,7 @@ public class AspectLogger {
 	@AfterReturning(pointcut = "execution(* com.eteration.cloud..controller.*.*(..))", returning = "returnVal")
 	public void logMethodAccessAfter(JoinPoint joinPoint, Object returnVal) {
 		Logger logger = LoggerFactory.getLogger(joinPoint.getTarget().getClass());
-		if(req != null) {
-			print(req,logger);
-		}
+
 		StringBuilder sb = new StringBuilder("Rest execution Return => ");
 		sb.append(joinPoint.getSignature());
 		if (logger.isDebugEnabled() && returnVal != null) {
@@ -57,6 +55,11 @@ public class AspectLogger {
 		sb = formatArgs(joinPoint, sb);
 		String log = sb.toString();
 		logger.info(log);
+
+		if(req != null) {
+			print(req,logger);
+		}
+
 	}
 
 	private StringBuilder formatArgs(JoinPoint jp, StringBuilder sb) {

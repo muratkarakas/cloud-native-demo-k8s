@@ -5,8 +5,8 @@ metadata:
   namespace: cna
   annotations:
     traefik.frontend.rule.type: PathPrefix
-    traefik.ingress.kubernetes.io/auth-type: "basic"
-    traefik.ingress.kubernetes.io/auth-secret: "authbasic"
+    #traefik.ingress.kubernetes.io/auth-type: "basic"
+    #traefik.ingress.kubernetes.io/auth-secret: "authbasic"
     traefik.ingress.kubernetes.io/service-weights: |
       product-service-v1: 20%
       product-service-v2: 80%

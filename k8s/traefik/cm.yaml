@@ -11,7 +11,7 @@ data:
          serviceName = "gateway"
          spanNameLimit = 150
          [tracing.zipkin]
-             httpEndpoint = "http://zipkin:9411/api/v1/spans"
+             httpEndpoint = "http://zipkin.istio-system:9411/api/v1/spans"
              debug = false
              sameSpan = false
              id128Bit = true

@@ -19,6 +19,7 @@ public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestI
 		Set<String> names = RequestContext.getContext().getHeaders().keySet();
 		
 		for (String name : names) {
+			System.out.println("Header name to pass => " + name);
 			request.getHeaders().add(name, RequestContext.getContext().getHeaders().get(name));
 
 		}

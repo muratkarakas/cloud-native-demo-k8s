@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: traefik-configmap-jaeger
+    namespace: kube-system
+data:
+    traefik.toml: |
+      [tracing]
+         backend = "jaeger"
+         serviceName = "lbtrfk"
+         spanNameLimit = 0
+         [tracing.jaeger]
+             propagation = "b3"
+             localAgentHostPort = "jaeger-agent.istio-system:6831"
+             httpEndpoint = "http://jaeger-agent.istio-system:5775/sampling"

@@ -7,7 +7,7 @@ metadata:
   namespace: cna
   name: customer-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: customer-service
