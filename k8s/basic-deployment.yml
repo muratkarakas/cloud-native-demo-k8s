@@ -4,7 +4,6 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  namespace: cna
   name: simple-rest 
 spec:
   replicas: 1
