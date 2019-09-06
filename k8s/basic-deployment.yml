@@ -19,7 +19,8 @@ spec:
     spec:
       containers:
       - image: mkarakas/simple-rest:latest
-        imagePullPolicy: IfNotPresent
+        #imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: simple-rest 
         ports:
         - containerPort: 8080
