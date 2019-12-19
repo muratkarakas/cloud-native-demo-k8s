@@ -4,4 +4,4 @@ server:
      context-path: /auth  
 spring:
   application:
-    name: config-server
+    name: auth-server
