@@ -1,27 +1,27 @@
 ##################################################################################################
-# Customer Service
+# simple-rest service deployment
 ##################################################################################################
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  namespace: cna
-  name: customer-service
+  name: simple-rest 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: customer-service
+      app: simple-rest 
       version: v1
   template:
     metadata:
       labels:
-        app: customer-service
+        app: simple-rest 
         version: v1
     spec:
       containers:
-      - image: k8s-customer-service:latest
-        imagePullPolicy: IfNotPresent
-        name: customer-service 
+      - image: mkarakas/simple-rest
+        #imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
+        name: simple-rest 
         ports:
-        - containerPort: 8082
+        - containerPort: 8080
           protocol: TCP
