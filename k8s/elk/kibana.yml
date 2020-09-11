@@ -18,12 +18,15 @@ spec:
     serv: kibana
   type: NodePort  
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kibana-v1
+  name: kibana
   namespace: cna
 spec:
+  selector:
+    matchLabels:
+      serv: kibana
   replicas: 1
   template:
     metadata:

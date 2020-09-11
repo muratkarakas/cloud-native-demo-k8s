@@ -46,17 +46,20 @@ spec:
   selector:
     serv: logstash
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: cna
-  name: logstash-v1
+  name: logstash
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      serv: logstash
   template:
     metadata:
       labels:
-        app: tcmb-so
+        app: elk
         serv: logstash
         version: v1
     spec:
